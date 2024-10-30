@@ -1,0 +1,22 @@
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: memberof
+olcModuleLoad: refint
+
+dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
+objectClass: olcMemberOf
+objectClass: olcOverlayConfig
+olcOverlay: memberof
+olcMemberOfRefInt: TRUE
+olcMemberOfGroupOC: groupOfUniqueNames
+olcMemberOfMemberAD: uniqueMember
+olcMemberOfMemberOfAD: memberOf
+
+dn: olcOverlay=refint,olcDatabase={2}mdb,cn=config
+objectClass: olcConfig
+objectClass: olcOverlayConfig
+objectClass: olcRefintConfig
+objectClass: top
+olcOverlay: refint
+olcRefintAttribute: memberof uniqueMember manager owner

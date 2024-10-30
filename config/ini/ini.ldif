@@ -1,0 +1,57 @@
+dn: dc=dopolytech,dc=fr
+objectClass: dcObject
+objectClass: organization
+dc: dopolytech
+o: dopolytech
+
+### GROUPS OU
+dn: ou=groups,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
+description: Organizational Unit for People
+
+dn: cn=do5,ou=groups,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: groupOfNames
+cn: do5
+description: Group for DO5 students
+member: uid=mmoreiradejesus,ou=People,dc=dopolytech,dc=fr
+### GROUPS OU
+
+### ROLES OU
+dn: ou=roles,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: organizationalUnit
+ou: roles
+description: Organizational Unit for People
+
+dn: cn=adminldap,ou=roles,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: groupOfNames
+cn: adminldap
+description: Group for LDAP administrators
+member: cn=admin,dc=dopolytech,dc=fr
+### ROLES OU
+
+### PEOPLE OU
+dn: ou=people,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+description: Organizational Unit for People
+
+dn: uid=mmoreiradejesus,ou=people,dc=dopolytech,dc=fr
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: polytechOrgPerson
+cn: Martin Moreira de Jesus
+sn: Moreira de Jesus
+uid: mmoreiradejesus
+mail: martin.moreira-de-jesus@dopolytech.fr
+userPassword: {SSHA}P65xxPehufzbTnElwBw/YZduA4FXpMOm
+dateOfBirth: 20020506000000Z
+telephoneNumber: +33788330823
+title: Mr
+## PEOPLE OU

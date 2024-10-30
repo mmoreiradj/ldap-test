@@ -1,0 +1,47 @@
+services:
+  openldap:
+    image: bitnami/openldap:latest
+    ports:
+      - '3890:1389'
+    environment:
+      LDAP_ROOT: dc=dopolytech,dc=fr
+      LDAP_ADMIN_USERNAME: admin
+      LDAP_ADMIN_PASSWORD: admin
+      LDAP_CUSTOM_LDIF_DIR: /ldifs
+      LDAP_CUSTOM_SCHEMA_DIR: /schemas
+      LDAP_ADMIN_DN: cn=admin,dc=dopolytech,dc=fr
+      LDAP_LOGLEVEL: 0
+      BITNAMI_DEBUG: true
+    volumes:
+      - ./config/ini:/ldifs
+      - ./config/schemas:/schemas
+      - ./config/permissive/custom.ldif:/opt/bitnami/openldap/etc/schema/custom.ldif
+      - openldap_data:/bitnami/openldap/data
+
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ACCESS_KEY: minio-access
+      MINIO_SECRET_KEY: minio-secret
+    #   MINIO_IDENTITY_LDAP_SERVER_ADDR: "openldap:1389"
+    #   MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN: "CN=xxxxx,OU=xxxxx,OU=xxxxx,DC=dopolytech,DC=fr"
+    #   MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN: "dc=dopolytech,dc=fr"
+    #   MINIO_IDENTITY_LDAP_USER_DN_SEARCH_FILTER: "(&(objectCategory=user)(sAMAccountName=%s))"
+    #   MINIO_IDENTITY_LDAP_LOOKUP_BIND_PASSWORD: "xxxxxxxxx"
+    #   MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER: "(&(objectClass=group)(member=%d))"
+    #   MINIO_IDENTITY_LDAP_GROUP_SEARCH_BASE_DN: "ou=MinIO Users,dc=example,dc=net"
+    #   MINIO_IDENTITY_LDAP_TLS_SKIP_VERIFY: "off"
+    #   MINIO_IDENTITY_LDAP_SERVER_INSECURE: "off"
+    #   MINIO_IDENTITY_LDAP_SERVER_STARTTLS: "off"
+    #   MINIO_IDENTITY_LDAP_SRV_RECORD_NAME: ""
+    #   MINIO_IDENTITY_LDAP_COMMENT: "LDAP test server"
+
+volumes:
+  openldap_data: {}
+  minio-data: {}

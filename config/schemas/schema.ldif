@@ -1,0 +1,7 @@
+dn: cn=polytechOrgPerson,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: polytechOrgPerson
+# OID of dateOfBirth cf https://ldap.com/ldap-oid-reference-guide/
+olcAttributeTypes: ( 1.3.6.1.5.5.7.9.1 NAME 'dateOfBirth' DESC 'Birth date' EQUALITY generalizedTimeMatch ORDERING generalizedTimeOrderingMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.24 SINGLE-VALUE )
+# OID of inetOrgPerson is 2.16.840.1.113730.3.2.2 cf https://ldap.com/ldap-oid-reference-guide/
+olcObjectClasses: ( 2.16.840.1.113730.3.2.200 NAME 'polytechOrgPerson' SUP inetOrgPerson STRUCTURAL MUST ( dateOfBirth ) )
